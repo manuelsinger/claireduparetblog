@@ -1,7 +1,16 @@
-title: Grav
+title: 'Claire Duparet'
+default_lang: en
 author:
-  name: Joe Bloggs
-  email: 'joe@example.com'
+  name: 'Claire Duparet'
+  email: claire.duparet@gmail.com
+taxonomies:
+  - tags
 metadata:
-    description: 'Grav is an easy to use, yet powerful, open source flat-file CMS'
-
+  description: 'Claire Duparet Portfolio'
+summary:
+  enabled: true
+  format: short
+  size: 300
+  delimiter: '==='
+blog:
+  route: /blog

@@ -1,0 +1,42 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+<div class="content-container container-fluid">
+		<div class="row">
+			<div class="col-xs-12">
+				<ul class="tags">
+					{% set taxonomies = [] %} {# result array #}
+					{% for p in page.collection %} {# for every page #}
+							{% for t in p.taxonomy.tags %} {# for every tag the taxonomy has #}
+								{% if t not in taxonomies %} {# if we haven't already seen it #}
+									{% set taxonomies = taxonomies|merge([t]) %}  {# addto result list #}
+								{% endif %}
+							{% endfor %}
+					{% endfor %}
+						<li class="tag active" data-toggle="active" data-value="all">All</li>
+					{% for tag in taxonomies %}
+						<li class="tag" data-toggle="active" data-value="{{ tag }}">{{ tag }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+    <div class="row">
+        <div class="content category">
+            {% for p in page.collection %}
+            	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3" data-tags="{% for tag in p.taxonomy.tags %}{{ tag }},{% endfor %} all">
+								<a href="{{ p.url }}">
+									{% if p.header.featured_img %}
+										{% set featured = p.media[p.header.featured_img] %}
+									{% else %}
+										{% set featured = p.media.images|first %}
+									{% endif %}
+									<div class="bg" {{ dump(featured) }} style="background-image:url('{{ featured.cropResize(600,600).url }}');"><div class="overlay"></div>
+									</div>
+									<h2>{{ p.title }}</h2>
+								</a>
+							</div>
+						{% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

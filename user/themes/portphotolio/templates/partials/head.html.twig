@@ -1,0 +1,33 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% for meta in page.metadata %}
+    {% if meta.name != 'generator' %}
+    <meta {% if meta.name %}name="{{ meta.name }}" {% endif %}{% if meta.http_equiv %}http-equiv="{{ meta.http_equiv }}" {% endif %}{% if meta.charset %}charset="{{ meta.charset }}" {% endif %}{% if meta.property %}property="{{ meta.property }}" {% endif %}{% if meta.content %}content="{{ meta.content }}" {% endif %}/>
+    {% endif %}
+{% endfor %}
+
+{% if theme_config.favicon != '' %}
+<link rel="icon" href="{{ url('theme://img/' ~ theme_config.favicon, true) }}" />
+{% endif %}
+
+{% if header.robots %}
+<meta name="robots" content="{{ header.robots }}">
+{% endif %}
+
+<title>{% if header.title %}{{ header.title }}{% else %}{{ site.title }}{% endif %}</title>
+
+{% block stylesheets %}
+    {% do assets.addCss('theme://vendor/bootstrap/css/bootstrap.min.css') %}
+    {% do assets.addCss('theme://css/portphotolio.min.css') %}
+    {% do assets.addCss('theme://vendor/font-awesome/css/font-awesome.min.css') %}
+{% endblock %}
+
+{{ assets.css() }}
+
+{% block javascripts %}
+    {% do assets.addJs('jquery', 101) %}
+    {% do assets.addJs('theme://vendor/bootstrap/js/bootstrap.min.js', 100) %}
+    {% do assets.addJs('theme://js/script.min.js') %}
+{% endblock %}

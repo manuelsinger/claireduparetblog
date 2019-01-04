@@ -1,0 +1,47 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 h1 title"><a href="{{ home_url }}">{{ site.title }}</a></div>
+        {% if page.header.subheading %}
+        {# <hr class="small">
+        <div class="col-xs-12">
+            <span class="subheading">{{ page.header.subheading }}</span>
+        </div> #}
+        {% endif %}
+    </div>
+
+    <nav class="row main-nav" id="main-nav">
+        <ul class="col-xs-12 nav">
+            {% for p in pages.children.visible %}
+            <li class="{% if page.url == p.url %} active {% endif %}">
+                <a href="{{ p.url }}">{{ p.menu }}</a>
+                    <ul>
+                        {% if page.url == p.url %}
+                            {% for sub in p.children %}
+                                <li><a href="{{ sub.url }}">{{ sub.menu }}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    {% if theme_config.social_icons|length > 0 %}
+    <div class="row social-icons">
+        <ul class="list-inline col-xs-12">
+            {% for icon in theme_config.social_icons %}
+            <li>
+                <a href="{{ icon.url }}">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-stack-1x fa-inverse {{ icon.icon }}"></i>
+                    </span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+</div>

@@ -1,0 +1,34 @@
+title: album
+'@extends':
+    type: default
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        options:
+          fields:
+            featured:
+              type: section
+              title: 'Featured Image'
+              underline: true
+
+              fields:
+                header.featured_img:
+                  label: featured image
+                  type: pagemediaselect
+                  multiple: false
+            layout:
+              type: section
+              title: 'Layout Choices'
+              underline: true
+
+              fields:
+                header.layout:
+                  label: layout type
+                  type: select
+                  options:
+                    default: 1 column
+                    3columns: 3 columns
